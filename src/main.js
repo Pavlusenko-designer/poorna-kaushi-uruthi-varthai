@@ -109,10 +109,10 @@ let pageDistance = 1;
 const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
 
 function measure() {
-  // Tamil lines can be taller; keep the portraits below the complete story text.
+  // Reserve space for wrapped text and its entrance movement in either language.
   stage.style.setProperty(
     "--story-safe-top",
-    `${narrative.offsetTop + narrative.offsetHeight + 20}px`,
+    `${narrative.offsetTop + narrative.offsetHeight + 32}px`,
   );
   storyTop = opening.offsetTop;
   storyDistance = Math.max(1, opening.offsetHeight - stage.offsetHeight);
@@ -165,6 +165,10 @@ addEventListener(
 addEventListener("resize", measure, { passive: true });
 addEventListener("load", measure, { once: true });
 document.fonts.ready.then(measure);
+// Font scaling and mobile browser chrome can change layout without a window resize.
+const openingResizeObserver = new ResizeObserver(measure);
+openingResizeObserver.observe(narrative);
+openingResizeObserver.observe(stage);
 reducedMotion.addEventListener("change", () => {
   measure();
 });
