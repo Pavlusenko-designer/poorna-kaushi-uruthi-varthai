@@ -2,6 +2,8 @@
 
 A mobile-first, animated invitation in English and Tamil for **20 November 2026, 7–9 AM IST**, at Annapurna Arunya Hall, Coimbatore.
 
+[Live invitation](https://poorna-kaushi-uruthi-varthai.netlify.app/) · [Tamil invitation](https://poorna-kaushi-uruthi-varthai.netlify.app/?lang=ta)
+
 ## Development
 
 ```sh
@@ -19,13 +21,13 @@ The static website is generated in `dist/`. It requires no environment variables
 
 ## Netlify continuous deployment
 
-Import this GitHub repository into Netlify and use `main` as the production branch. The included `netlify.toml` configures:
+The Netlify project `poorna-kaushi-uruthi-varthai` is connected to this GitHub repository, with `main` as the production branch. The included `netlify.toml` configures:
 
 - Build command: `npm run build`
 - Publish directory: `dist`
 - Node.js: `22`
 
-Once the repository is connected, pushes to `main` trigger Netlify builds and production deployments.
+Pushes to `main` trigger Netlify builds and production deployments through the repository's active push webhook. Netlify accesses the repository with a read-only deploy key.
 
 ## Content and assets
 
@@ -41,4 +43,4 @@ The language switcher remembers the guest's choice. Add `?lang=ta` to open the T
 
 Run `node scripts/prepare-assets.mjs` when regenerating portraits, the sharing image, and English fonts. Run `node scripts/prepare-tamil-fonts.mjs` to regenerate Tamil fonts. These scripts need internet access to fetch fonts; ordinary builds use the included local assets.
 
-After choosing the production domain, set absolute `og:url` and `og:image` URLs in `index.html` for the broadest messenger compatibility.
+The production URL, canonical link, and absolute messenger preview URL are set in `index.html`.
